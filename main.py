@@ -15,7 +15,7 @@ logo = """
 """
 
 # bugs:
-# when bust occurs, it's not ending the game and returning to input
+# need to fix problem where if checkScore() is called and either user/comp wins
 
 
 print(logo)
@@ -49,20 +49,17 @@ def checkScore(user_list, computer_list):
         time.sleep(3)
         clear()
         reset()
-        blackJack()
     elif score_comp > 21:
         print(f"Computer have {computer_cards}")
         print("You've won, Computer lost")
         time.sleep(3)
         clear()
         reset()
-        blackJack()
     elif ((score_comp and score_user) > 21):
         print("You've lost")
         time.sleep(3)
         clear()
         reset()
-        blackJack()
 
 def reset():
     user_cards = []
@@ -97,7 +94,6 @@ def blackJack():
         else:
             print("Unknown input was entered")
             choice = input("Do you want to hit or stand? Type 'h' or 's': ")
-    blackJack()
 
 
 keepRunning = input("Do you want to play Blackjack? Type 'y' for yes or 'n' for no: ")
