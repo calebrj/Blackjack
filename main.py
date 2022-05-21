@@ -13,6 +13,11 @@ logo = """
       |  \/ K|                            _/ |                
       `------'                           |__/           
 """
+
+# bugs:
+# majority of bugs fixed, might find some though :P
+
+
 def hit(list):
     """A function which takes in either the cards user/pc and adds a card from the deck """
     card_index = random.randint(0, len(cards))
@@ -37,16 +42,26 @@ def checkScore(user_list, computer_list):
     score_comp = 0
     score_user = findValue(user_list)
     score_comp = findValue(computer_list)
-    if score_user > 21:
-        print(f"You have {user_cards}")
-        print("BUST! \nYou've lost")
+    if score_comp > score_user and (score_comp and score_user) < 21:
+        print("You've won with a score of {score_user}, Computer lost with a score of {score_comp}")
+        time.sleep(3)
+        clear()
+        reset(user_cards, computer_cards)
+        game()
+    elif ((score_comp and score_user) > 21): 
+        print("You've lost with a score of {score_user}, Computer won with a score of {score_comp}")
+        time.sleep(3)
+        clear()
+        reset(user_cards, computer_cards)
+        game()
+    elif score_user > 21:
+        print(f"BUST! \nYou've lost with a score of {score_user}")
         time.sleep(3)
         clear()
         reset(user_cards, computer_cards)
         game()
     elif score_comp > 21:
-        print(f"Computer has {computer_cards}")
-        print("You've won, Computer lost")
+        print(f"You've won, Computer lost with a score of {score_comp}")
         time.sleep(3)
         clear()
         reset(user_cards, computer_cards)
@@ -67,6 +82,7 @@ def blackJack():
     hit(user_cards)
     hit(computer_cards)
     hit(computer_cards)
+    checkScore(user_cards, computer_cards)
     choice = "h"
     while choice == "h":
         print(f"You have: {user_cards}")
