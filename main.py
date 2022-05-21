@@ -48,24 +48,27 @@ def checkScore(user_list, computer_list):
         print("BUST! \nYou've lost")
         time.sleep(3)
         clear()
+        reset()
+        blackJack()
     elif score_comp > 21:
         print(f"Computer have {computer_cards}")
         print("You've won, Computer lost")
         time.sleep(3)
         clear()
+        reset()
+        blackJack()
     elif ((score_comp and score_user) > 21):
         print("You've lost")
         time.sleep(3)
         clear()
+        reset()
+        blackJack()
 
-#need to put keepRunning at bottom of while after written to continue/stop loop
-keepRunning = input("Do you want to play Blackjack? Type 'y' for yes or 'n' for no: ")
-if keepRunning != ("y" or "n"):
-    print("Unknown input, try running the game again")
-    keepRunning = input("Do you want to play Blackjack? Type 'y' for yes or 'n' for no: ")
-while(keepRunning == "y"):
+def reset():
     user_cards = []
     computer_cards = []
+
+def blackJack():
     hit(user_cards)
     hit(user_cards)
     hit(computer_cards)
@@ -88,10 +91,25 @@ while(keepRunning == "y"):
                 print(f"Computer currently has: {computer_cards}")
                 comp_score = findValue(computer_cards)
             user_score = findValue(user_cards)
-            comp_score = findValue(comp_score)
+            comp_score = findValue(computer_cards)
             checkScore(user_cards, computer_cards)
+            reset()
         else:
             print("Unknown input was entered")
             choice = input("Do you want to hit or stand? Type 'h' or 's': ")
-    keepRunning = input("Do you want to play Blackjack? Type 'y' for yes or 'n' for no: ")
+    blackJack()
 
+
+keepRunning = input("Do you want to play Blackjack? Type 'y' for yes or 'n' for no: ")
+if keepRunning == "y":
+    user_cards = []
+    computer_cards = []
+    blackJack()
+elif keepRunning == "n":
+    time.sleep(3)
+    clear()
+    exit()
+else:
+    print("Unknown input, try running the game again")
+    clear()
+    blackJack()
