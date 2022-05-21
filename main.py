@@ -20,7 +20,7 @@ logo = """
 
 def hit(list):
     """A function which takes in either the cards user/pc and adds a card from the deck """
-    card_index = random.randint(0, len(cards) - 1)
+    card_index = random.randint(0, len(cards))
     if card_index == 0:
         current_val = findValue(list)
         item = ""
