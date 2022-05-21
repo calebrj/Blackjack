@@ -13,11 +13,6 @@ logo = """
       |  \/ K|                            _/ |                
       `------'                           |__/           
 """
-
-# bugs:
-# majority of bugs fixed, might find some though :P
-
-
 def hit(list):
     """A function which takes in either the cards user/pc and adds a card from the deck """
     card_index = random.randint(0, len(cards))
@@ -26,7 +21,7 @@ def hit(list):
         item = ""
         if current_val <= 10:
             list.append(1)
-    item = int(cards[card_index])
+    item = int(cards[card_index - 1])
     list.append(item)
 
 def findValue(list):
@@ -47,25 +42,25 @@ def checkScore(user_list, computer_list):
         print("BUST! \nYou've lost")
         time.sleep(3)
         clear()
-        reset()
+        reset(user_cards, computer_cards)
         game()
     elif score_comp > 21:
         print(f"Computer has {computer_cards}")
         print("You've won, Computer lost")
         time.sleep(3)
         clear()
-        reset()
+        reset(user_cards, computer_cards)
         game()
     elif ((score_comp and score_user) > 21):
         print("You've lost")
         time.sleep(3)
         clear()
-        reset()
+        reset(user_cards, computer_cards)
         game()
 
-def reset():
-    user_cards = user_cards.clear()
-    computer_cards = computer_cards.clear()
+def reset(list1, list2):
+    list1.clear()
+    list2.clear()
 
 def blackJack():
     hit(user_cards)
@@ -92,7 +87,7 @@ def blackJack():
             user_score = findValue(user_cards)
             comp_score = findValue(computer_cards)
             checkScore(user_cards, computer_cards)
-            reset()
+            reset(user_cards, computer_cards)
         else:
             print("Unknown input was entered")
             choice = input("Do you want to hit or stand? Type 'h' or 's': ")
