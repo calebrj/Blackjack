@@ -15,10 +15,9 @@ logo = """
 """
 
 # bugs:
-# need to fix problem where if checkScore() is called and either user/comp wins
+# majority of bugs fixed, might find some though :P
 
 
-print(logo)
 def hit(list):
     """A function which takes in either the cards user/pc and adds a card from the deck """
     card_index = random.randint(0, len(cards) - 1)
@@ -49,17 +48,20 @@ def checkScore(user_list, computer_list):
         time.sleep(3)
         clear()
         reset()
+        game()
     elif score_comp > 21:
-        print(f"Computer have {computer_cards}")
+        print(f"Computer has {computer_cards}")
         print("You've won, Computer lost")
         time.sleep(3)
         clear()
         reset()
+        game()
     elif ((score_comp and score_user) > 21):
         print("You've lost")
         time.sleep(3)
         clear()
         reset()
+        game()
 
 def reset():
     user_cards = []
@@ -94,18 +96,24 @@ def blackJack():
         else:
             print("Unknown input was entered")
             choice = input("Do you want to hit or stand? Type 'h' or 's': ")
+    game()
 
+def game():
+    print(logo)
+    keepRunning = input("Do you want to play Blackjack? Type 'y' for yes or 'n' for no: ")
+    if keepRunning == "y":
+        user_cards = []
+        computer_cards = []
+        blackJack()
+    elif keepRunning == "n":
+        time.sleep(3)
+        clear()
+        exit()
+    else:
+        print("Unknown input, try running the game again")
+        clear()
+        game()
 
-keepRunning = input("Do you want to play Blackjack? Type 'y' for yes or 'n' for no: ")
-if keepRunning == "y":
-    user_cards = []
-    computer_cards = []
-    blackJack()
-elif keepRunning == "n":
-    time.sleep(3)
-    clear()
-    exit()
-else:
-    print("Unknown input, try running the game again")
-    clear()
-    blackJack()
+user_cards = []
+computer_cards = []
+game()
