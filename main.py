@@ -1,5 +1,6 @@
 import random
 import time
+from turtle import clear
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
 logo = """
@@ -14,11 +15,7 @@ logo = """
 """
 
 # bugs:
-
-#  line 29, in hit
-#     list.append(item)
-# AttributeError: 'int' object has no attribute 'append'
-
+# when bust occurs, it's not ending the game and returning to input
 
 
 print(logo)
@@ -47,17 +44,19 @@ def checkScore(user_list, computer_list):
     score_user = findValue(user_list)
     score_comp = findValue(computer_list)
     if score_user > 21:
+        print(f"You have {user_cards}")
         print("BUST! \nYou've lost")
         time.sleep(3)
-        exit()
+        clear()
     elif score_comp > 21:
+        print(f"Computer have {computer_cards}")
         print("You've won, Computer lost")
         time.sleep(3)
-        exit()
+        clear()
     elif ((score_comp and score_user) > 21):
         print("You've lost")
         time.sleep(3)
-        exit()
+        clear()
 
 #need to put keepRunning at bottom of while after written to continue/stop loop
 keepRunning = input("Do you want to play Blackjack? Type 'y' for yes or 'n' for no: ")
@@ -85,9 +84,12 @@ while(keepRunning == "y"):
             comp_score = findValue(computer_cards)
             while comp_score < 17:
                 print("Computer chooses to hit")
-                hit(comp_score)
+                hit(computer_cards)
                 print(f"Computer currently has: {computer_cards}")
-                findValue(computer_cards)
+                comp_score = findValue(computer_cards)
+            user_score = findValue(user_cards)
+            comp_score = findValue(comp_score)
+            checkScore(user_cards, computer_cards)
         else:
             print("Unknown input was entered")
             choice = input("Do you want to hit or stand? Type 'h' or 's': ")
