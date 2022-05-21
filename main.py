@@ -64,8 +64,8 @@ def checkScore(user_list, computer_list):
         game()
 
 def reset():
-    user_cards = []
-    computer_cards = []
+    user_cards = user_cards.clear()
+    computer_cards = computer_cards.clear()
 
 def blackJack():
     hit(user_cards)
